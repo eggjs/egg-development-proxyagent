@@ -22,7 +22,7 @@
 
 互联网时代，无数服务是基于 HTTP 协议进行通信的，web 应用调用后端 HTTP 服务是一种非常常见的应用场景。
 
-为此 egg 框架 内置实现了一个 [httpclient](https://eggjs.org/zh-cn/core/httpclient)，应用可以非常便捷地完成任何 HTTP 请求。
+为此框架内置实现了一个 [httpclient](https://eggjs.org/zh-cn/core/httpclient)，应用可以非常便捷地完成任何 HTTP 请求。
 
 而本插件用于对 httpclient 的请求提供抓包调试辅助功能。
 
@@ -42,7 +42,7 @@ exports.proxyagent = {
 
 ## 使用方式
 
-插件只会在 `local` 环境内打开，会覆盖 egg 内部 httpclient 的 `agent` 和 `httpsAgent` 参数，所以作用范围是全局的。你可以使用 http 协议来代理 HTTP, HTTPS 请求。
+插件只会在 `local` 环境内打开，会覆盖 egg 内部 httpclient 的 `agent` 和 `httpsAgent` 参数，所以作用范围是全局的。你可以使用 http 协议来代理 HTTP，HTTPS 请求。
 
 插件遵循 Bash 中设置代理的环境变量 `http_proxy` 或 `HTTP_PROXY`，你也可以在启动应用的时候定义：
 
@@ -59,7 +59,7 @@ $ http_proxy=http://127.0.0.1:8888 node index.js
 ```js
 // config/config.default.js
 exports.proxyagent = {
-  ca: 'xxxxxxxxxxxx'
+  ca: 'xxxxxxxxxxxx',
 };
 ```
 
@@ -69,7 +69,7 @@ exports.proxyagent = {
 
 - [charles](https://www.charlesproxy.com/)
 - [fiddler](http://www.telerik.com/fiddler)
-- [anyproxy](https://github.com/alibaba/anyproxy) 是 node 版的抓包工具, 提供了 web 控制台, 可以替代 charles
+- [anyproxy](https://github.com/alibaba/anyproxy) 是 node 版的抓包工具，提供了 web 控制台，可以替代 charles
 
 ```bash
 $ npm install anyproxy -g

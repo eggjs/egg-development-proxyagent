@@ -20,11 +20,11 @@
 [download-image]: https://img.shields.io/npm/dm/egg-development-proxyagent.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-development-proxyagent
 
-互联网时代，无数服务是基于 HTTP 协议进行通信的，web 应用调用后端 HTTP 服务是一种非常常见的应用场景。
+Nowadays lots of services are built upon HTTP protocol. So it's quite common to invoke backend services based on HTTP.
 
-为此 egg 框架 内置实现了一个 [httpclient](https://eggjs.org/zh-cn/core/httpclient)，应用可以非常便捷地完成任何 HTTP 请求。
+There is a built-in [httpclient](https://eggjs.org/zh-cn/core/httpclient) in Egg framework so that we can use it to invoke HTTP services easily.
 
-而本插件用于对 httpclient 的请求提供抓包调试辅助功能。
+This plugin provides a way of capturing HTTP request for debugging purpose.
 
 ## Install
 
@@ -42,34 +42,36 @@ exports.proxyagent = {
 
 ## Usage
 
-插件只会在 `local` 环境内打开，会覆盖 egg 内部 httpclient 的 `agent` 和 `httpsAgent` 参数，所以作用范围是全局的。你可以使用 http 协议来代理 HTTP, HTTPS 请求。
+This plugin will take effect only in `local` env. Because it overrides the `agent` and `httpsAgent` of httpclient, so it will work for every request. And also you can delegate HTTPS requests via HTTP.
 
-插件遵循 Bash 中设置代理的环境变量 `http_proxy` 或 `HTTP_PROXY`，你也可以在启动应用的时候定义：
+`http_proxy` or `HTTP_PROXY` environment variable will be used if set in Bash. Or you can specify it when you start app:
 
 ```bash
 $ http_proxy=http://127.0.0.1:8888 node index.js
 ```
 
-### HTTPS 请求抓包
+### Capturing HTTPS Traffic
 
-默认会将 `httpproxy` 配置传递给 urllib 的 `httpsAgent`，并且传递 `rejectUnauthorized = false`，不过在使用自签证书时需要配置证书，具体方法如下：
+By default the `http_proxy`(or `HTTP_PROXY`) mentioned above will be passed to `httpsAgent` of urllib, and `rejectUnauthorized = false` will be set.
+
+However, when using self-signed certificate we need to configure the certificate, shown as follows:
 
 > `ca` String | Buffer | Array - An array of strings or Buffers of trusted certificates. If this is omitted several well known "root" CAs will be used, like VeriSign. These are used to authorize connections. Notes: This is necessary only if the server uses the self-signed certificate
 
 ```js
 // config/config.default.js
 exports.proxyagent = {
-  ca: 'xxxxxxxxxxxx'
+  ca: 'xxxxxxxxxxxx',
 };
 ```
 
-### 抓包工具
+### Capturing Tool
 
-**注意：本插件并不包含抓包工具**，你需使用以下工具配套使用：
+**Note: Capturing tool is not in this plugin**, you can use one of them below:
 
 - [charles](https://www.charlesproxy.com/)
 - [fiddler](http://www.telerik.com/fiddler)
-- [anyproxy](https://github.com/alibaba/anyproxy) 是 node 版的抓包工具, 提供了 web 控制台, 可以替代 charles
+- [anyproxy](https://github.com/alibaba/anyproxy) is a capturing tool writtern in node. It provides a web console, it's a good replacement of charles.
 
 ```bash
 $ npm install anyproxy -g
@@ -77,7 +79,7 @@ $ anyproxy --port 8888
 $ open http://localhost:8002
 ```
 
-效果截图：
+Screenshot:
 
 ![anyproxy](https://cloud.githubusercontent.com/assets/227713/21976937/06a63694-dc0f-11e6-98b5-e9e279c4867c.png)
 
