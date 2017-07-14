@@ -29,11 +29,11 @@
 ## 安装插件
 
 ```bash
-npm i egg-development-proxyagent --save
+npm i egg-development-proxyagent --save-dev
 ```
 
 ```js
-// config/plugin.js
+// config/plugin.local.js
 exports.proxyagent = {
   enable: true,
   package: 'egg-development-proxyagent',
