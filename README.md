@@ -26,6 +26,36 @@ There is a built-in [httpclient](https://eggjs.org/zh-cn/core/httpclient) in Egg
 
 This plugin provides a way of capturing HTTP request for debugging purpose.
 
+## DEPRECATED
+
+**This plugin is deprecated, instead, you just need to add below code to `config.local.js`**
+
+```js
+// config.local.js
+module.exports = () => {
+  const config = {};
+
+  // add http_proxy to httpclient
+  if (process.env.http_proxy) {
+    config.httpclient = {
+      request: {
+        enableProxy: true,
+        rejectUnauthorized: false,
+        // proxy: process.env.http_proxy,
+      },
+    };
+  }
+
+  return config;
+}
+```
+
+then start your application by:
+
+```bash
+$ http_proxy=http://127.0.0.1:8888 npm run dev
+```
+
 ## Install
 
 ```bash
